@@ -1,0 +1,337 @@
+game name Fiewin complete 
+
+❤️1indexhtml
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiewin - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>Welcome to FIEWIN</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Phone or Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <p>Don't have an account? <a href="register.html">Register</a></p>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+❤️2style.css
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container, .home-container, .game-container, .about-container {
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+  backdrop-filter: blur(4px);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+a {
+  color: #00c3ff;
+  text-decoration: none;
+}
+
+.wallet, .betting-section {
+  margin: 20px 0;
+}
+
+
+❤️3script.js
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (username === "" || password === "") {
+    alert("Please fill all fields!");
+    return;
+  }
+
+  alert("Login Successful!");
+  window.location.href = "home.html";
+});
+
+
+❤️4register.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiewin - Register</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>Register on FIEWIN</h1>
+    <form id="registerForm">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="text" id="phone" placeholder="Phone Number" required>
+      <input type="password" id="regPassword" placeholder="Password" required>
+      <button type="submit">Register</button>
+      <p>Already have an account? <a href="index.html">Login</a></p>
+    </form>
+  </div>
+  <script src="register.js"></script>
+</body>
+</html>
+
+❤️5register.js
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const password = document.getElementById("regPassword").value.trim();
+
+  if (name === "" || phone === "" || password === "") {
+    alert("Please fill all fields!");
+    return;
+  }
+
+  alert("Registration Successful!");
+  window.location.href = "index.html";
+});
+
+
+❤️6home.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiewin - Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="home-container">
+    <h1>Welcome to <span style="color: #00c3ff;">FIEWIN</span></h1>
+    <div class="wallet">
+      <h2>💰 Wallet Balance: ₹<span id="walletBalance">0</span></h2>
+    </div>
+    <div class="buttons">
+      <button onclick="startGame()">▶️ Start Game</button>
+      <button onclick="depositMoney()">➕ Add Money</button>
+      <button onclick="window.location.href='about.html'">ℹ️ About</button>
+      <button onclick="window.location.href='https://t.me/Fiewincs'">☎️ Support</button>
+    </div>
+  </div>
+  <script src="home.js"></script>
+</body>
+</html>
+
+
+❤️7home.js
+let walletBalance = 0;
+
+if (localStorage.getItem('walletBalance')) {
+  walletBalance = parseFloat(localStorage.getItem('walletBalance'));
+  document.getElementById("walletBalance").innerText = walletBalance;
+}
+
+function startGame() {
+  window.location.href = "game.html";
+}
+
+function depositMoney() {
+  let amount = prompt("Enter amount to add:");
+  if (amount && !isNaN(amount)) {
+    walletBalance += parseFloat(amount);
+    localStorage.setItem('walletBalance', walletBalance);
+    document.getElementById("walletBalance").innerText = walletBalance;
+    alert("₹" + amount + " added successfully!");
+  } else {
+    alert("Invalid Amount!");
+  }
+}
+
+
+❤️8game.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiewin - Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>🎲 FIEWIN Betting Game</h1>
+    <div class="betting-section">
+      <input type="number" id="betAmount" placeholder="Enter Bet Amount" required>
+      <button onclick="placeBet()">Place Bet</button>
+    </div>
+    <div id="gameResult"></div>
+    <button onclick="goHome()">🏠 Home</button>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
+
+
+❤️9game.js
+let walletBalance = 0;
+
+if (localStorage.getItem('walletBalance')) {
+  walletBalance = parseFloat(localStorage.getItem('walletBalance'));
+}
+
+function placeBet() {
+  let bet = parseFloat(document.getElementById('betAmount').value);
+
+  if (isNaN(bet) || bet <= 0) {
+    alert("Enter a valid bet amount!");
+    return;
+  }
+
+  if (bet > walletBalance) {
+    alert("Not enough balance!");
+    return;
+  }
+
+  let random = Math.random();
+  if (random < 0.5) {
+    walletBalance += bet;
+    document.getElementById('gameResult').innerHTML = `<h2 style="color: #00ff00;">You Won! New Balance: ₹${walletBalance}</h2>`;
+  } else {
+    walletBalance -= bet;
+    document.getElementById('gameResult').innerHTML = `<h2 style="color: #ff0000;">You Lost! New Balance: ₹${walletBalance}</h2>`;
+  }
+
+  localStorage.setItem('walletBalance', walletBalance);
+}
+
+function goHome() {
+  window.location.href = "home.html";
+}
+
+
+
+
+❤️10about.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - Fiewin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="about-container">
+    <h1>About FIEWIN</h1>
+    <p>FIEWIN is a trusted and entertaining gaming platform where users can play real money games and enjoy amazing winnings.</p>
+    <h2>Terms and Conditions:</h2>
+    <ul>
+      <li>Users must be 18+ years old.</li>
+      <li>All payments must be done through the registered UPI ID.</li>
+      <li>Gambling involves risk. Play responsibly.</li>
+      <li>No refunds once the money is credited.</li>
+      <li>Management has the right to modify the terms at any time.</li>
+    </ul>
+    <p style="margin-top: 30px;">Created by Monu Godara</p>
+  </div>
+</body>
+</html>
+
+
+
+❤️logo.xml
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/appLogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"
+        android:contentDescription="App Logo"
+        android:scaleType="fitCenter" />
+
+</LinearLayout>
+
+❤️logo.java
+ImageView logoImage = findViewById(R.id.appLogo);
+logoImage.setImageResource(R.drawable.logo);
+
+
+❤️ activity.main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <!-- App Logo -->
+    <ImageView
+        android:id="@+id/appLogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"
+        android:contentDescription="App Logo"
+        android:scaleType="fitCenter"/>
+
+    <!-- Welcome Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to FIEWIN"
+        android:textSize="24sp"
+        android:textColor="#000000"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"/>
+
+</LinearLayout>
